@@ -54,7 +54,7 @@ function App() {
 
         .main-content {
           flex-grow: 1;
-          /* Margin top is handled by header height for normal pages */
+          padding-bottom: 6rem; /* Keep space between page content and the footer, never let them touch */
         }
       `}</style>
     </div>
