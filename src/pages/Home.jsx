@@ -507,17 +507,12 @@ export default function Home({ setCurrentPage }) {
         }
 
         .stat-circle {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 141, 218, 0.2) 0%, transparent 70%);
-          border: 2px solid var(--accent-blue);
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          box-shadow: 0 0 25px rgba(0, 141, 218, 0.2);
           margin-bottom: 2rem;
+          text-align: center;
         }
 
         .stat-number {
