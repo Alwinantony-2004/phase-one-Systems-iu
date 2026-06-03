@@ -549,16 +549,20 @@ export default function Portfolio() {
         @media (max-width: 992px) {
           .modal-body {
             grid-template-columns: 1fr;
-          }
-          .modal-image-col {
-            min-height: 300px;
+            height: auto; /* Let layout flow naturally to prevent height squishing/overlapping */
           }
           .modal-content-col {
             padding: 3rem 2rem;
+            overflow-y: visible; /* Prevent scrollbar overlaps inside the column */
           }
         }
 
         @media (max-width: 768px) {
+          .portfolio-filters {
+            margin-top: 0; /* Remove negative margin to prevent hero description overlap */
+            margin-bottom: 2.5rem;
+            gap: 0.75rem;
+          }
           .modal-close {
             position: fixed;
             top: 1rem;
