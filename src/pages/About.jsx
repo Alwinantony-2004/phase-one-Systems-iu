@@ -104,7 +104,7 @@ export default function About({ setCurrentPage }) {
         }
 
         .about-hero-title {
-          font-size: 3.5rem;
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
           font-weight: 500;
           color: #ffffff;
           margin-bottom: 1rem;
@@ -278,8 +278,23 @@ export default function About({ setCurrentPage }) {
             grid-template-columns: 1fr;
             gap: 2.5rem;
           }
-          .about-hero-title {
-            font-size: 2.75rem;
+        }
+
+        @media (max-width: 768px) {
+          .divider {
+            margin: 3rem 0;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .premium-accent-box {
+            padding: 2rem 1.5rem;
+          }
+          .values-banner {
+            padding: 2rem 1.25rem;
+          }
+          .mission-card {
+            padding: 1.5rem;
           }
         }
       `}</style>

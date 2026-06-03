@@ -126,7 +126,7 @@ ul {
 }
 
 .section-title {
-  font-size: 2.75rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 500;
   margin-bottom: 1.5rem;
 }

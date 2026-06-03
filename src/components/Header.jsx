@@ -214,7 +214,13 @@ export default function Header({ currentPage, setCurrentPage, setServicesTab }) 
           padding: 0 4rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
+          .header-container {
+            padding: 0 2rem;
+          }
+        }
+
+        @media (max-width: 1024px) {
           .header-container {
             padding: 0 1.5rem;
           }
@@ -242,15 +248,15 @@ export default function Header({ currentPage, setCurrentPage, setServicesTab }) 
 
         .nav-list {
           display: flex;
-          gap: 2rem; /* Adjusted gap to account for link padding */
+          gap: 1.25rem; /* Adjusted gap to fit medium screens */
         }
 
         .nav-link {
           font-family: var(--font-headings);
-          font-size: 1.15rem;
+          font-size: 1.05rem; /* Slightly smaller for mature design and better fit */
           font-weight: 500;
           color: var(--text-dark-secondary);
-          padding: 0.5rem 1.25rem; /* Capsule horizontal/vertical padding */
+          padding: 0.4rem 1rem; /* Compact capsule padding */
           border-radius: 30px; /* Pill layout */
           transition: all var(--transition-fast);
           letter-spacing: 0.04em;
@@ -368,8 +374,11 @@ export default function Header({ currentPage, setCurrentPage, setServicesTab }) 
           background: var(--bg-dark-primary);
           z-index: 999;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
+          padding: calc(var(--header-height) + 3rem) 2rem 2rem 2rem;
+          overflow-y: auto;
           transform: translateY(-100%);
           transition: transform var(--transition-normal);
         }
@@ -398,16 +407,7 @@ export default function Header({ currentPage, setCurrentPage, setServicesTab }) 
           color: var(--accent-cyan);
         }
 
-        @media (max-width: 992px) {
-          .nav-list {
-            gap: 2rem;
-          }
-          .nav-link {
-            font-size: 1.05rem;
-          }
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .desktop-nav, .btn-header-cta {
             display: none;
           }

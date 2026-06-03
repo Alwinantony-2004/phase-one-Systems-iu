@@ -283,7 +283,7 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
         }
 
         .services-hero-title {
-          font-size: 3.5rem;
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
           font-weight: 500;
           color: #ffffff;
           margin-bottom: 1rem;
@@ -570,9 +570,6 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
           .tab-panel {
             padding: 2.5rem;
           }
-          .services-hero-title {
-            font-size: 2.75rem;
-          }
         }
 
         @media (max-width: 768px) {
@@ -594,6 +591,19 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
           }
           .services-cta-banner {
             padding: 2.5rem 1.5rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .tab-panel {
+            padding: 1.5rem;
+            border-radius: 16px;
+          }
+          .service-detail-card {
+            padding: 1.5rem;
+          }
+          .services-cta-banner {
+            padding: 2rem 1rem;
           }
         }
       `}</style>

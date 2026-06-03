@@ -153,7 +153,7 @@ export default function Technologies() {
         }
 
         .tech-hero-title {
-          font-size: 3.5rem;
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
           font-weight: 500;
           color: #ffffff;
           margin-bottom: 1rem;
@@ -302,11 +302,17 @@ export default function Technologies() {
         }
 
         @media (max-width: 768px) {
-          .tech-hero-title {
-            font-size: 2.75rem;
-          }
           .tech-philosophy-banner {
             padding: 2.5rem 1.5rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .tech-stack-card {
+            padding: 1.5rem;
+          }
+          .tech-philosophy-banner {
+            padding: 2rem 1.25rem;
           }
         }
       `}</style>

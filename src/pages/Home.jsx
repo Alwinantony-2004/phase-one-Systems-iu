@@ -300,7 +300,7 @@ export default function Home({ setCurrentPage }) {
         }
 
         .hero-title {
-          font-size: 4.5rem;
+          font-size: clamp(2.25rem, 8vw, 4.5rem);
           line-height: 1.1;
           font-weight: 500;
           margin-bottom: 1.5rem;
@@ -474,8 +474,9 @@ export default function Home({ setCurrentPage }) {
 
         .visual-block-wrapper {
           position: relative;
-          width: 380px;
-          height: 380px;
+          width: 100%;
+          max-width: 380px;
+          aspect-ratio: 1 / 1;
         }
 
         .visual-block-decoration {
@@ -718,13 +719,6 @@ export default function Home({ setCurrentPage }) {
         }
 
         @media (max-width: 992px) {
-          .hero-title {
-            font-size: 3.5rem;
-          }
-          .visual-block-wrapper {
-            width: 320px;
-            height: 320px;
-          }
           .cta-form-grid {
             grid-template-columns: 1fr;
             gap: 4rem;
@@ -732,9 +726,6 @@ export default function Home({ setCurrentPage }) {
         }
 
         @media (max-width: 768px) {
-          .hero-title {
-            font-size: 2.75rem;
-          }
           .hero-subtitle {
             font-size: 1.1rem;
             margin-bottom: 2rem;

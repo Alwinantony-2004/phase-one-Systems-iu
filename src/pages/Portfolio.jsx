@@ -210,7 +210,7 @@ export default function Portfolio() {
         }
 
         .portfolio-hero-title {
-          font-size: 3.5rem;
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
           font-weight: 500;
           color: #ffffff;
           margin-bottom: 1rem;
@@ -559,8 +559,32 @@ export default function Portfolio() {
         }
 
         @media (max-width: 768px) {
-          .portfolio-hero-title {
-            font-size: 2.75rem;
+          .modal-close {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg-dark-tertiary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+            z-index: 2001; /* Above modal card */
+          }
+        }
+
+        @media (max-width: 576px) {
+          .portfolio-info {
+            padding: 1.5rem;
+          }
+          .modal-content-col {
+            padding: 2rem 1.25rem;
+          }
+          .modal-content-col h2 {
+            font-size: 1.75rem;
+          }
+          .modal-backdrop {
+            padding: 1rem;
+          }
+          .modal-card {
+            border-radius: 16px;
           }
         }
       `}</style>

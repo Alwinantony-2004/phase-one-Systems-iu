@@ -102,7 +102,7 @@ export default function Contact() {
         }
 
         .contact-hero-title {
-          font-size: 3.5rem;
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
           font-weight: 500;
           color: #ffffff;
           margin-bottom: 1rem;
@@ -243,9 +243,13 @@ export default function Contact() {
           }
         }
 
-        @media (max-width: 768px) {
-          .contact-hero-title {
-            font-size: 2.75rem;
+        @media (max-width: 576px) {
+          .contact-page-form-container {
+            padding: 1.5rem;
+            border-radius: 16px;
+          }
+          .contact-quote-card {
+            padding: 1.5rem;
           }
         }
       `}</style>
