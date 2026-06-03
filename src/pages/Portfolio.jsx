@@ -99,7 +99,7 @@ export default function Portfolio() {
       </section>
 
       {/* Portfolio Grid & Filter */}
-      <section className="portfolio-grid-section section-light">
+      <section className="portfolio-grid-section section section-light">
         <LightCanvas />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           {/* Filters */}
@@ -229,7 +229,7 @@ export default function Portfolio() {
           justify-content: center;
           gap: 1rem;
           margin-bottom: 4rem;
-          margin-top: -2rem;
+          margin-top: 0;
           position: relative;
           z-index: 10;
           flex-wrap: wrap;

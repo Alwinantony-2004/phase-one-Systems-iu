@@ -22,7 +22,7 @@ export default function About({ setCurrentPage }) {
       </section>
 
       {/* Core Concept Details */}
-      <section className="about-content-section section-light">
+      <section className="about-content-section section section-light">
         <LightCanvas />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="grid-2 details-intro-grid">

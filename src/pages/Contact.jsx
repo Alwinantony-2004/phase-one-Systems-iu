@@ -37,7 +37,7 @@ export default function Contact() {
       </section>
 
       {/* Main Details Panel */}
-      <section className="contact-details-section section-light">
+      <section className="contact-details-section section section-light">
         <LightCanvas />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="grid-2 contact-main-grid">

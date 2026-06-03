@@ -98,7 +98,7 @@ export default function Technologies() {
       </section>
 
       {/* Tech Content Grid */}
-      <section className="tech-grid-section section-light">
+      <section className="tech-grid-section section section-light">
         <LightCanvas />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           {/* Categories Nav */}
@@ -172,7 +172,7 @@ export default function Technologies() {
           justify-content: center;
           gap: 1rem;
           margin-bottom: 4rem;
-          margin-top: -2rem;
+          margin-top: 0;
           position: relative;
           z-index: 10;
           flex-wrap: wrap;

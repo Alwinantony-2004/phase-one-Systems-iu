@@ -204,7 +204,7 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
       </section>
 
       {/* Interactive Tabs */}
-      <section className="services-tabs-section section-light">
+      <section className="services-tabs-section section section-light">
         <LightCanvas />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="tabs-nav">
@@ -302,7 +302,7 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
           justify-content: center;
           gap: 1.5rem;
           margin-bottom: 4rem;
-          margin-top: -2rem;
+          margin-top: 0;
           position: relative;
           z-index: 10;
         }
