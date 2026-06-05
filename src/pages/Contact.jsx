@@ -52,7 +52,7 @@ export default function Contact() {
                   <div className="method-icon-wrap"><Mail size={20} /></div>
                   <div>
                     <h4>Direct Email</h4>
-                    <a href="mailto:contact@iusystems.com" className="method-link">contact@iusystems.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswini@iu-systems.com" target="_blank" rel="noopener noreferrer" className="method-link">tejaswini@iu-systems.com</a>
                     <p className="method-subtext">We respond within 24 hours.</p>
                   </div>
                 </div>
@@ -61,7 +61,7 @@ export default function Contact() {
                   <div className="method-icon-wrap"><Linkedin size={20} /></div>
                   <div>
                     <h4>LinkedIn Profile</h4>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="method-link">linkedin.com/company/i-ne-u</a>
+                    <a href="https://www.linkedin.com/company/125074039/admin/page-posts/published/" target="_blank" rel="noopener noreferrer" className="method-link">linkedin.com/company/125074039</a>
                     <p className="method-subtext">Follow us for updates and concepts.</p>
                   </div>
                 </div>

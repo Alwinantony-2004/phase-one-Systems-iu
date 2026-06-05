@@ -23,62 +23,175 @@ const Figma = ({ size = 24, className }) => (
   </svg>
 );
 
-function ShowcaseSlideshow({ images, title }) {
+function ServiceVisual({ type }) {
+  switch (type) {
+    case 'ui-ux':
+      return (
+        <div className="service-visual-box uiux-box">
+          <div className="wireframe-mobile">
+            <div className="mobile-header">
+              <span className="dot"></span>
+              <span className="bar"></span>
+            </div>
+            <div className="mobile-body">
+              <div className="skeleton-hero animate-pulse-slow"></div>
+              <div className="skeleton-grid">
+                <div className="skeleton-item animate-pulse-slow"></div>
+                <div className="skeleton-item animate-pulse-slow"></div>
+              </div>
+              <div className="skeleton-text animate-pulse-slow"></div>
+            </div>
+          </div>
+          <div className="wireframe-desktop">
+            <div className="desktop-header">
+              <span className="window-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span className="url-bar"></span>
+            </div>
+            <div className="desktop-body">
+              <div className="skeleton-sidebar">
+                <div className="sidebar-item"></div>
+                <div className="sidebar-item"></div>
+                <div className="sidebar-item"></div>
+              </div>
+              <div className="skeleton-content">
+                <div className="skeleton-chart">
+                  <svg viewBox="0 0 100 40" className="chart-svg">
+                    <path d="M0,35 Q15,10 30,25 T60,5 T90,30 L100,40 L0,40 Z" fill="rgba(65, 201, 226, 0.1)" stroke="var(--accent-cyan)" strokeWidth="2" />
+                    <circle cx="30" cy="25" r="3" fill="#ffffff" />
+                    <circle cx="60" cy="5" r="3" fill="#ffffff" />
+                  </svg>
+                </div>
+                <div className="skeleton-cards">
+                  <div className="skeleton-card"></div>
+                  <div className="skeleton-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    case 'app-dev':
+      return (
+        <div className="service-visual-box code-box">
+          <div className="editor-header">
+            <span className="tab-file active">App.jsx</span>
+            <span className="tab-file inactive">index.css</span>
+          </div>
+          <div className="editor-content font-mono">
+            <pre>
+              <code>
+<span className="keyword">import</span> React, &#123; useState &#125; <span className="keyword">from</span> <span className="string">'react'</span>;<br/>
+<span className="keyword">import</span> &#123; createRoot &#125; <span className="keyword">from</span> <span className="string">'react-dom/client'</span>;<br/><br/>
+
+<span className="keyword">const</span> <span className="function">ScaleSystem</span> = (props) =&gt; &#123;<br/>
+  <span className="keyword">const</span> [active, setActive] = <span className="function">useState</span>(<span className="boolean">true</span>);<br/><br/>
+  
+  <span className="keyword">return</span> (<br/>
+    &lt;<span className="tag">div</span> <span className="attr">className</span>=<span className="string">"flex items-center"</span>&gt;<br/>
+      &lt;<span className="tag">span</span>&gt;System Operational&lt;/<span className="tag">span</span>&gt;<br/>
+      &lt;<span className="tag">StatusPulse</span> <span className="attr">state</span>=&#123;active&#125; /&gt;<br/>
+    &lt;/<span className="tag">div</span>&gt;<br/>
+  );<br/>
+&#125;;<br/><br/>
+
+<span className="keyword">export default</span> <span className="function">ScaleSystem</span>;
+              </code>
+            </pre>
+          </div>
+        </div>
+      );
+    case 'integrations':
+      return (
+        <div className="service-visual-box workflow-box">
+          <div className="node-wrapper">
+            <div className="workflow-node node-trigger">
+              <div className="node-icon-wrap"><Smartphone size={20} /></div>
+              <span>Webhook</span>
+              <span className="badge trigger">Trigger</span>
+            </div>
+            <div className="connector-line">
+              <div className="pulse-dot"></div>
+            </div>
+            <div className="workflow-node node-process">
+              <div className="node-icon-wrap"><Cpu size={20} /></div>
+              <span>n8n pipeline</span>
+              <span className="badge process">Process</span>
+            </div>
+            <div className="connector-line">
+              <div className="pulse-dot delay-1"></div>
+            </div>
+            <div className="workflow-node node-destination">
+              <div className="node-icon-wrap"><Database size={20} /></div>
+              <span>ERPNext</span>
+              <span className="badge sync">Sync</span>
+            </div>
+          </div>
+        </div>
+      );
+    default:
+      return null;
+  }
+}
+
+function ShowcaseSlideshow({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000); // 4s Auto-play
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
     return () => clearInterval(timer);
   }, [images.length]);
 
   const handlePrev = (e) => {
     e.stopPropagation();
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   const handleNext = (e) => {
     e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   return (
-    <div className="showcase-slideshow-container">
-      <div 
-        className="slideshow-track" 
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {images.map((img, idx) => (
-          <div key={idx} className="slide-item">
-            <img src={img} alt={`${title} slide ${idx + 1}`} className="panel-showcase-img" />
-          </div>
+    <div className="showcase-slideshow">
+      {images.map((imgSrc, idx) => (
+        <div 
+          key={imgSrc} 
+          className={`slideshow-slide ${idx === currentIndex ? 'active' : ''}`}
+        >
+          <img src={imgSrc} alt={`Integration visual ${idx + 1}`} className="slideshow-img" />
+        </div>
+      ))}
+      
+      <button className="slideshow-nav prev" onClick={handlePrev} aria-label="Previous slide">
+        <ChevronLeft size={20} />
+      </button>
+      <button className="slideshow-nav next" onClick={handleNext} aria-label="Next slide">
+        <ChevronRight size={20} />
+      </button>
+
+      <div className="slideshow-dots">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            className={`slideshow-dot ${idx === currentIndex ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentIndex(idx);
+            }}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
         ))}
       </div>
-      
-      {images.length > 1 && (
-        <>
-          <button className="slideshow-arrow arrow-left" onClick={handlePrev} aria-label="Previous slide">
-            <ChevronLeft size={20} />
-          </button>
-          <button className="slideshow-arrow arrow-right" onClick={handleNext} aria-label="Next slide">
-            <ChevronRight size={20} />
-          </button>
-          <div className="slideshow-dots">
-            {images.map((_, idx) => (
-              <button 
-                key={idx} 
-                className={`slideshow-dot ${currentIndex === idx ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
     </div>
   );
 }
+
 
 export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
 
@@ -86,11 +199,6 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
     'ui-ux': {
       title: 'UI/UX Design & Product Strategy',
       subtitle: 'Design that speaks. Interfaces that convert.',
-      images: [
-        '/assets/portfolio-uiux.png',
-        '/assets/portfolio-uiux-tablet.jpg',
-        '/assets/portfolio-dashboard.png'
-      ],
       desc: 'We place user behavior at the center of our creative process. Our designs do not just look stunning—they feel intuitive, simplify complex flows, and support your business goals.',
       items: [
         {
@@ -123,10 +231,6 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
     'app-dev': {
       title: 'Full-Stack Software Development',
       subtitle: 'Performant architectures. Clean code.',
-      images: [
-        '/assets/portfolio-devops.png',
-        '/assets/portfolio-uiux-code.jpg'
-      ],
       desc: 'We engineer secure, scalable, and responsive applications tailored to your business. Our developers work side-by-side with our designers to ensure pixel-perfect fidelity.',
       items: [
         {
@@ -154,11 +258,6 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
     'integrations': {
       title: 'Integrations & Workflow Automation',
       subtitle: 'Connect systems. Eliminate manual labor.',
-      images: [
-        '/assets/portfolio-erp.png',
-        '/assets/portfolio-chain.png',
-        '/assets/portfolio-automation.png'
-      ],
       desc: 'We bind isolated software programs into a cohesive neural network. By automating data pipelines and setting up centralized database engines, we save your team hundreds of manual hours.',
       items: [
         {
@@ -240,7 +339,33 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
                 <p className="panel-desc">{tabContent[activeTab].desc}</p>
               </div>
               <div className="panel-intro-image-container">
-                <ShowcaseSlideshow images={tabContent[activeTab].images} title={tabContent[activeTab].title} />
+                {activeTab === 'integrations' ? (
+                  <ShowcaseSlideshow 
+                    images={[
+                      '/assets/integration-handshake.jpg',
+                      '/assets/integration-network.jpg',
+                      '/assets/integration-automation.jpg'
+                    ]} 
+                  />
+                ) : activeTab === 'app-dev' ? (
+                  <ShowcaseSlideshow 
+                    images={[
+                      '/assets/appdev-chart.jpg',
+                      '/assets/appdev-brain.jpg',
+                      '/assets/appdev-dashboard.jpg'
+                    ]} 
+                  />
+                ) : activeTab === 'ui-ux' ? (
+                  <ShowcaseSlideshow 
+                    images={[
+                      '/assets/uiux-tactile.jpg',
+                      '/assets/uiux-tablet.jpg',
+                      '/assets/uiux-laptop.jpg'
+                    ]} 
+                  />
+                ) : (
+                  <ServiceVisual type={activeTab} />
+                )}
               </div>
             </div>
 
@@ -369,98 +494,472 @@ export default function Services({ activeTab, setActiveTab, setCurrentPage }) {
           border: 1px solid var(--border-light);
         }
 
-        /* Showcase Slideshow Styles */
-        .showcase-slideshow-container {
+        /* Slideshow styles */
+        .showcase-slideshow {
           position: relative;
           width: 100%;
-          overflow: hidden;
           aspect-ratio: 16 / 10;
+          overflow: hidden;
+          background: var(--bg-dark-primary);
         }
 
-        .slideshow-track {
-          display: flex;
+        .slideshow-slide {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .slide-item {
-          min-width: 100%;
-          width: 100%;
-          height: 100%;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #060c14;
         }
 
-        .panel-showcase-img {
+        .slideshow-slide.active {
+          opacity: 1;
+        }
+
+        .slideshow-img {
           width: 100%;
           height: 100%;
-          object-fit: contain;
-          transition: opacity 0.3s ease;
+          object-fit: cover;
         }
 
-        .slideshow-arrow {
+        .slideshow-nav {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          width: 38px;
-          height: 38px;
-          border-radius: 50%;
-          background: rgba(7, 14, 23, 0.6);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+          background: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(4px);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #ffffff;
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all var(--transition-fast);
-          z-index: 10;
           cursor: pointer;
+          opacity: 0;
+          transition: opacity 0.3s ease, background 0.3s ease, transform 0.2s ease;
+          z-index: 5;
+          outline: none;
         }
 
-        .slideshow-arrow:hover {
-          background: rgba(7, 14, 23, 0.9);
-          border-color: var(--accent-cyan);
-          color: var(--accent-cyan);
-          transform: translateY(-50%) scale(1.05);
+        .showcase-slideshow:hover .slideshow-nav {
+          opacity: 1;
         }
 
-        .arrow-left {
+        .slideshow-nav:hover {
+          background: rgba(0, 141, 218, 0.6);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .slideshow-nav.prev {
           left: 1rem;
         }
 
-        .arrow-right {
+        .slideshow-nav.next {
           right: 1rem;
         }
 
         .slideshow-dots {
           position: absolute;
-          bottom: 1rem;
+          bottom: 1.25rem;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
           gap: 0.5rem;
-          z-index: 10;
+          z-index: 5;
         }
 
         .slideshow-dot {
           width: 8px;
           height: 8px;
+          border: none;
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.4);
-          transition: all var(--transition-fast);
           cursor: pointer;
-          border: none;
+          transition: all 0.3s ease;
           padding: 0;
+          outline: none;
+        }
+
+        .slideshow-dot:hover {
+          background: rgba(255, 255, 255, 0.8);
         }
 
         .slideshow-dot.active {
           background: var(--accent-cyan);
-          width: 22px;
+          width: 24px;
           border-radius: 4px;
+        }
+
+        /* Service Visual Containers */
+        .service-visual-box {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          overflow: hidden;
+          background: var(--bg-dark-primary);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          color: #ffffff;
+        }
+
+        /* UIUX Wireframe Mockup Visual */
+        .uiux-box {
+          background: linear-gradient(135deg, #070e17 0%, #0c1825 100%);
+          gap: 1.5rem;
+        }
+
+        .wireframe-mobile {
+          width: 90px;
+          height: 180px;
+          border: 2px solid rgba(65, 201, 226, 0.4);
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.02);
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+          flex-shrink: 0;
+        }
+
+        .mobile-header {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .mobile-header .dot {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: rgba(65, 201, 226, 0.4);
+        }
+
+        .mobile-header .bar {
+          flex-grow: 1;
+          height: 3px;
+          border-radius: 2px;
+          background: rgba(65, 201, 226, 0.2);
+        }
+
+        .mobile-body {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .skeleton-hero {
+          width: 100%;
+          height: 45px;
+          background: rgba(0, 141, 218, 0.15);
+          border: 1px dashed rgba(0, 141, 218, 0.3);
+          border-radius: 6px;
+        }
+
+        .skeleton-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+        }
+
+        .skeleton-item {
+          height: 35px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+        }
+
+        .skeleton-text {
+          width: 80%;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 3px;
+          margin-top: auto;
+        }
+
+        .wireframe-desktop {
+          flex-grow: 1;
+          height: 180px;
+          border: 2px solid rgba(0, 141, 218, 0.3);
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.02);
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+          overflow: hidden;
+        }
+
+        .desktop-header {
+          height: 24px;
+          background: rgba(255, 255, 255, 0.03);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          padding: 0 8px;
+          gap: 12px;
+        }
+
+        .window-dots {
+          display: flex;
+          gap: 4px;
+        }
+
+        .window-dots span {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .url-bar {
+          flex-grow: 0.6;
+          height: 10px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 5px;
+        }
+
+        .desktop-body {
+          flex-grow: 1;
+          display: flex;
+        }
+
+        .skeleton-sidebar {
+          width: 45px;
+          border-right: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 10px 6px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .sidebar-item {
+          width: 100%;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 4px;
+        }
+
+        .skeleton-content {
+          flex-grow: 1;
+          padding: 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .skeleton-chart {
+          flex-grow: 1;
+          border: 1px dashed rgba(65, 201, 226, 0.2);
+          border-radius: 6px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .chart-svg {
+          width: 100%;
+          height: 100%;
+        }
+
+        .skeleton-cards {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        .skeleton-card {
+          height: 30px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          border-radius: 4px;
+        }
+
+        /* IDE Code Block Visual */
+        .code-box {
+          background: #050c14;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          flex-direction: column;
+          align-items: stretch;
+          padding: 0;
+        }
+
+        .editor-header {
+          height: 36px;
+          background: rgba(255, 255, 255, 0.02);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          padding: 0 16px;
+          gap: 1rem;
+        }
+
+        .tab-file {
+          font-family: var(--font-headings);
+          font-size: 0.85rem;
+          font-weight: 500;
+          padding: 0 4px;
+          cursor: default;
+        }
+
+        .tab-file.active {
+          color: var(--accent-cyan);
+          border-bottom: 2px solid var(--accent-cyan);
+          height: 100%;
+          display: flex;
+          align-items: center;
+          margin-top: 2px;
+        }
+
+        .tab-file.inactive {
+          color: var(--text-dark-muted);
+        }
+
+        .editor-content {
+          padding: 1.5rem;
+          overflow-x: auto;
+          font-size: 0.85rem;
+          line-height: 1.5;
+          text-align: left;
+        }
+
+        .editor-content pre {
+          margin: 0;
+        }
+
+        .keyword { color: #f43f5e; }
+        .string { color: #10b981; }
+        .function { color: #008DDA; }
+        .boolean { color: #f59e0b; }
+        .tag { color: #6366f1; }
+        .attr { color: #41C9E2; }
+
+        /* Workflow Integration Node Graph */
+        .workflow-box {
+          background: radial-gradient(circle at center, #0c1825 0%, #070e17 100%);
+        }
+
+        .node-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          max-width: 420px;
+          position: relative;
+        }
+
+        .workflow-node {
+          width: 110px;
+          padding: 12px 8px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          z-index: 2;
+          position: relative;
+        }
+
+        .node-icon-wrap {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 141, 218, 0.1);
+          border: 1px solid rgba(0, 141, 218, 0.2);
+          color: var(--accent-blue);
+        }
+
+        .node-trigger .node-icon-wrap {
+          background: rgba(65, 201, 226, 0.1);
+          border-color: rgba(65, 201, 226, 0.2);
+          color: var(--accent-cyan);
+        }
+
+        .workflow-node span {
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: var(--text-dark-primary);
+          text-align: center;
+        }
+
+        .workflow-node .badge {
+          font-size: 0.65rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          padding: 2px 6px;
+          border-radius: 4px;
+        }
+
+        .badge.trigger {
+          background: rgba(65, 201, 226, 0.15);
+          color: var(--accent-cyan);
+        }
+
+        .badge.process {
+          background: rgba(0, 141, 218, 0.15);
+          color: var(--accent-blue);
+        }
+
+        .badge.sync {
+          background: rgba(16, 115, 222, 0.15);
+          color: #2563eb;
+        }
+
+        .connector-line {
+          flex-grow: 1;
+          height: 2px;
+          background: linear-gradient(90deg, rgba(65, 201, 226, 0.4) 0%, rgba(0, 141, 218, 0.4) 100%);
+          position: relative;
+          z-index: 1;
+        }
+
+        .pulse-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent-cyan);
+          position: absolute;
+          top: -2px;
+          left: 0;
+          animation: pulseMove 2.5s infinite linear;
+          box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .pulse-dot.delay-1 {
+          animation-delay: 1.25s;
+          background: var(--accent-blue);
+          box-shadow: 0 0 8px var(--accent-blue);
+        }
+
+        @keyframes pulseMove {
+          0% { left: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { left: 100%; opacity: 0; }
+        }
+
+        .animate-pulse-slow {
+          animation: pulseSlow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseSlow {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 0.8; }
         }
 
         .panel-subtitle {

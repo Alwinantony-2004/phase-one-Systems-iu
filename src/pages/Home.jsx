@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layers, Monitor, GitBranch, ShieldCheck, Zap, Users, ArrowRight } from 'lucide-react';
 import HeroCanvas from '../components/HeroCanvas';
 import LightCanvas from '../components/LightCanvas';
+import FloatingPixels from '../components/FloatingPixels';
 import ContactForm from '../components/ContactForm';
+
+function CardSlideshow({ images }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div className="card-slideshow">
+      {images.map((imgSrc, idx) => (
+        <div 
+          key={imgSrc} 
+          className={`card-slide ${idx === currentIndex ? 'active' : ''}`}
+        >
+          <img src={imgSrc} alt={`Automation visual ${idx + 1}`} className="card-img-preview" />
+        </div>
+      ))}
+      <div className="card-slideshow-dots">
+        {images.map((_, idx) => (
+          <span 
+            key={idx} 
+            className={`card-slideshow-dot ${idx === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 export default function Home({ setCurrentPage }) {
   const handleNavClick = (pageId) => {
@@ -14,24 +48,24 @@ export default function Home({ setCurrentPage }) {
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero-section" id="hero">
-        <HeroCanvas />
+        <FloatingPixels />
         <div className="container hero-container">
           <div className="hero-content">
             <span className="hero-badge animate-pulse-slow">I ≠ U App Solutions & Systems</span>
             <h1 className="hero-title">
-              We Design and Build <br />
-              <span className="text-gradient-blue">Systems that Scale</span>
+              Design. Develop. <br />
+              <span className="text-gradient-blue">Scale.</span>
             </h1>
             <p className="hero-subtitle">
-              A product-first technology team delivering elite UI/UX designs, robust application codebases, and seamless automation pipelines.
+              Product-focused technology solution creating elite UI/UX designs, scalable applications, ERP systems, and automation workflows that help teams move faster and operate smarter.
             </p>
             <div className="hero-actions">
               <button onClick={() => handleNavClick('contact')} className="btn btn-primary">
                 Start Your Project
                 <ArrowRight size={18} />
               </button>
-              <button onClick={() => handleNavClick('portfolio')} className="btn btn-secondary">
-                View Our Work
+              <button onClick={() => handleNavClick('services')} className="btn btn-secondary">
+                Explore Services
               </button>
             </div>
           </div>
@@ -53,7 +87,11 @@ export default function Home({ setCurrentPage }) {
           <div className="grid-3">
             <div className="glass-card what-we-do-card">
               <div className="card-img-preview-wrap">
-                <img src="/assets/portfolio-uiux.png" alt="UI/UX Showcase" className="card-img-preview" />
+                <img 
+                  src="/assets/uiux-home.png" 
+                  alt="UI/UX Design" 
+                  className="card-img-preview"
+                />
               </div>
               <div className="card-info-content">
                 <div className="card-icon-wrap"><Layers className="card-icon" /></div>
@@ -67,7 +105,11 @@ export default function Home({ setCurrentPage }) {
 
             <div className="glass-card what-we-do-card">
               <div className="card-img-preview-wrap">
-                <img src="/assets/portfolio-devops.png" alt="App Development Showcase" className="card-img-preview" />
+                <img 
+                  src="/assets/appdev-home.png" 
+                  alt="App Development" 
+                  className="card-img-preview"
+                />
               </div>
               <div className="card-info-content">
                 <div className="card-icon-wrap"><Monitor className="card-icon" /></div>
@@ -81,7 +123,11 @@ export default function Home({ setCurrentPage }) {
 
             <div className="glass-card what-we-do-card">
               <div className="card-img-preview-wrap">
-                <img src="/assets/portfolio-chain.png" alt="Integrations Showcase" className="card-img-preview" />
+                <img 
+                  src="/assets/integration-home.jpg" 
+                  alt="Integrations & Automation" 
+                  className="card-img-preview"
+                />
               </div>
               <div className="card-info-content">
                 <div className="card-icon-wrap"><GitBranch className="card-icon" /></div>
@@ -102,10 +148,11 @@ export default function Home({ setCurrentPage }) {
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="grid-2 why-grid">
             <div className="why-content">
-              <span className="section-subtitle">Our Philosophy</span>
-              <h2 className="section-title">Why Work With Us</h2>
+              <span className="section-subtitle">Why work with us</span>
+              <h2 className="section-title">Product-First Mindset</h2>
               <p className="why-lead text-light-secondary">
-                We believe in partnerships over transactions, quality over volume, and code that stands the test of time.
+                Every design, feature, and workflow is built around user experience, business objectives, and long-term scalability <br />
+                not just project requirements.
               </p>
               <ul className="why-list">
                 <li>
@@ -118,8 +165,8 @@ export default function Home({ setCurrentPage }) {
                 <li>
                   <div className="why-list-icon"><Zap size={20} /></div>
                   <div>
-                    <h4>Product-First Mindset</h4>
-                    <p>We don't just take orders; we challenge ideas, refine requirements, and help shape your product strategy for success.</p>
+                    <h4>Strategic Product Partnership</h4>
+                    <p>We question assumptions, simplify complexity, and help prioritize what truly matters—so your team invests time and budget in features that create real impact.</p>
                   </div>
                 </li>
                 <li>
@@ -133,20 +180,11 @@ export default function Home({ setCurrentPage }) {
             </div>
             
             <div className="why-visual">
-              <div className="visual-block-wrapper">
-                <div className="visual-block-decoration"></div>
-                <div className="visual-block">
-                  <div className="stat-circle">
-                    <span className="stat-number">I≠U</span>
-                    <span className="stat-label">App Solutions</span>
-                  </div>
-                  <div className="glowing-node-list">
-                    <div className="glowing-node active">Design Systems</div>
-                    <div className="glowing-node active">Robust APIs</div>
-                    <div className="glowing-node active">Workflow Automation</div>
-                  </div>
-                </div>
-              </div>
+              <img 
+                src="/assets/why-logo.png" 
+                alt="I ≠ U Logo" 
+                className="why-logo-img" 
+              />
             </div>
           </div>
         </div>
@@ -246,11 +284,11 @@ export default function Home({ setCurrentPage }) {
               <div className="contact-info-cards">
                 <div className="info-mini-card">
                   <h5>Direct Email</h5>
-                  <a href="mailto:contact@iusystems.com">contact@iusystems.com</a>
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswini@iu-systems.com" target="_blank" rel="noopener noreferrer">tejaswini@iu-systems.com</a>
                 </div>
                 <div className="info-mini-card">
                   <h5>LinkedIn Page</h5>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">I ≠ U Company Profile</a>
+                  <a href="https://www.linkedin.com/company/125074039/admin/page-posts/published/" target="_blank" rel="noopener noreferrer">I ≠ U Company Profile</a>
                 </div>
               </div>
             </div>
@@ -364,6 +402,53 @@ export default function Home({ setCurrentPage }) {
           transform: scale(1.05);
         }
 
+        .card-slideshow {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .card-slide {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+        }
+
+        .card-slide.active {
+          opacity: 1;
+        }
+
+        .card-slideshow-dots {
+          position: absolute;
+          bottom: 0.75rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 0.35rem;
+          z-index: 5;
+        }
+
+        .card-slideshow-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          transition: all 0.3s ease;
+        }
+
+        .card-slideshow-dot.active {
+          background: var(--accent-cyan);
+          width: 15px;
+          border-radius: 3px;
+        }
+
         .card-info-content {
           padding: 2.5rem;
           display: flex;
@@ -472,88 +557,13 @@ export default function Home({ setCurrentPage }) {
           position: relative;
         }
 
-        .visual-block-wrapper {
-          position: relative;
+        .why-logo-img {
+          max-width: 280px;
           width: 100%;
-          max-width: 380px;
-          aspect-ratio: 1 / 1;
-        }
-
-        .visual-block-decoration {
-          position: absolute;
-          top: -15px;
-          left: -15px;
-          width: 100%;
-          height: 100%;
-          border: 2px dashed rgba(0, 141, 218, 0.3);
-          border-radius: 20px;
-          animation: spin 60s linear infinite;
-        }
-
-        .visual-block {
-          width: 100%;
-          height: 100%;
-          background: var(--bg-dark-secondary);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: 2.5rem;
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
-          z-index: 2;
-          position: relative;
-        }
-
-        .stat-circle {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 2rem;
-          text-align: center;
-        }
-
-        .stat-number {
-          font-family: var(--font-headings);
-          font-size: 1.75rem;
-          font-weight: 600;
-          color: #ffffff;
-        }
-
-        .stat-label {
-          font-size: 0.75rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--accent-cyan);
-          margin-top: 0.2rem;
-        }
-
-        .glowing-node-list {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-          width: 100%;
-        }
-
-        .glowing-node {
-          padding: 0.6rem 1rem;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 8px;
-          font-family: var(--font-headings);
-          font-size: 0.9rem;
-          font-weight: 500;
-          text-align: center;
-          color: var(--text-dark-secondary);
-        }
-
-        .glowing-node.active {
-          border-color: rgba(65, 201, 226, 0.3);
-          background: rgba(65, 201, 226, 0.05);
-          color: #ffffff;
-          box-shadow: 0 0 15px rgba(65, 201, 226, 0.05);
+          height: auto;
+          display: block;
+          margin: 0 auto;
+          filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.08));
         }
 
         /* Services Overview Cards */

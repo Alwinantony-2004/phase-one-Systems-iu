@@ -36,10 +36,10 @@ export default function Footer({ setCurrentPage }) {
               We design premium digital interfaces, develop robust cross-platform applications, and orchestrate complex workflow integrations to simplify your business operations.
             </p>
             <div className="social-links">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/125074039/admin/page-posts/published/" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="LinkedIn">
                 <Linkedin size={18} />
               </a>
-              <a href="mailto:contact@iusystems.com" className="social-icon-btn" aria-label="Email">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswini@iu-systems.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Email">
                 <Mail size={18} />
               </a>
             </div>
@@ -51,7 +51,6 @@ export default function Footer({ setCurrentPage }) {
               <li><button onClick={() => handleNavClick('home')}>Home</button></li>
               <li><button onClick={() => handleNavClick('services')}>Services</button></li>
               <li><button onClick={() => handleNavClick('about')}>About Us</button></li>
-              <li><button onClick={() => handleNavClick('portfolio')}>Portfolio / Work</button></li>
               <li><button onClick={() => handleNavClick('technologies')}>Technologies</button></li>
             </ul>
           </div>
@@ -71,11 +70,11 @@ export default function Footer({ setCurrentPage }) {
             <ul className="footer-contact-list">
               <li>
                 <span className="contact-label">Email:</span>
-                <a href="mailto:contact@iusystems.com" className="contact-value">contact@iusystems.com</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswini@iu-systems.com" target="_blank" rel="noopener noreferrer" className="contact-value">tejaswini@iu-systems.com</a>
               </li>
               <li>
                 <span className="contact-label">LinkedIn:</span>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-value">linkedin.com/company/i-ne-u</a>
+                <a href="https://www.linkedin.com/company/125074039/admin/page-posts/published/" target="_blank" rel="noopener noreferrer" className="contact-value">linkedin.com/company/125074039</a>
               </li>
               <li>
                 <span className="contact-label">Location:</span>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About';
-import Portfolio from './pages/Portfolio';
 import Technologies from './pages/Technologies';
 import Contact from './pages/Contact';
 
@@ -22,8 +21,6 @@ function App() {
         return <Services activeTab={servicesTab} setActiveTab={setServicesTab} setCurrentPage={setCurrentPage} />;
       case 'about':
         return <About setCurrentPage={setCurrentPage} />;
-      case 'portfolio':
-        return <Portfolio />;
       case 'technologies':
         return <Technologies />;
       case 'contact':

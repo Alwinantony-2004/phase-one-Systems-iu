@@ -29,15 +29,7 @@ export default function Header({ currentPage, setCurrentPage, setServicesTab }) 
         { label: 'Integrations & Automation', tabId: 'integrations' }
       ]
     },
-    { 
-      id: 'about', 
-      label: 'About Us',
-      dropdownItems: [
-        { label: 'Who We Are', scrollId: 'why-us' },
-        { label: 'Our Mission', scrollId: 'why-us' }
-      ]
-    },
-    { id: 'portfolio', label: 'Portfolio' },
+    { id: 'about', label: 'About Us' },
     { id: 'technologies', label: 'Technologies' },
     { id: 'contact', label: 'Contact' },
   ];
